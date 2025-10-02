@@ -49,14 +49,14 @@ export const skiRegions = [
   { name: "Engelberg", country: "Switzerland", elevation: 1050 },
 ];
 
-// Generate realistic daily data for the past year
+// Generate realistic daily data for the past 3 years
 export const generateSkiRegionData = (): SkiRegionData[] => {
   const data: SkiRegionData[] = [];
   const startDate = new Date();
-  startDate.setFullYear(startDate.getFullYear() - 1);
+  startDate.setFullYear(startDate.getFullYear() - 3);
   
   skiRegions.forEach((region) => {
-    for (let i = 0; i < 365; i++) {
+    for (let i = 0; i < 1095; i++) { // 3 years of daily data
       const currentDate = new Date(startDate);
       currentDate.setDate(startDate.getDate() + i);
       
