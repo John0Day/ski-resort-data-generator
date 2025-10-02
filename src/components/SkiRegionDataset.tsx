@@ -5,14 +5,18 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Download, Filter, Mountain, Thermometer, Wind, CloudRain, Snowflake } from "lucide-react";
+import { Download, Filter, Mountain, Thermometer, Wind, CloudRain, Snowflake, Loader2 } from "lucide-react";
 import { generateSkiRegionData, type SkiRegionData } from "@/data/skiRegionsData";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 export default function SkiRegionDataset() {
   const [data] = useState<SkiRegionData[]>(() => generateSkiRegionData());
   const [searchTerm, setSearchTerm] = useState("");
   const [countryFilter, setCountryFilter] = useState("all");
   const [dateFilter, setDateFilter] = useState("");
+  const [isGeneratingUrl, setIsGeneratingUrl] = useState(false);
+  const { toast } = useToast();
   
   const filteredData = useMemo(() => {
     return data.filter(record => {
@@ -79,6 +83,41 @@ export default function SkiRegionDataset() {
     if (temp <= 10) return "text-green-400";
     if (temp <= 20) return "text-yellow-400";
     return "text-red-400";
+  };
+
+  const generateCloudUrl = async () => {
+    setIsGeneratingUrl(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-dataset');
+      
+      if (error) {
+        console.error('Error generating dataset:', error);
+        toast({
+          title: "Error",
+          description: "Failed to generate cloud URL. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data?.url) {
+        await navigator.clipboard.writeText(data.url);
+        toast({
+          title: "Success!",
+          description: `URL copied to clipboard! ${data.recordCount.toLocaleString()} records uploaded.`,
+        });
+        window.open(data.url, '_blank');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to generate cloud URL. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGeneratingUrl(false);
+    }
   };
 
   return (
@@ -179,9 +218,23 @@ export default function SkiRegionDataset() {
                   <Download className="h-4 w-4 mr-2" />
                   Export JSON
                 </Button>
-                <Button onClick={() => window.open('https://pzghdabqnsdthysjzacl.supabase.co/functions/v1/generate-dataset', '_blank')} variant="default" size="sm">
-                  <Download className="h-4 w-4 mr-2" />
-                  Get Cloud URL
+                <Button 
+                  onClick={generateCloudUrl} 
+                  variant="default" 
+                  size="sm"
+                  disabled={isGeneratingUrl}
+                >
+                  {isGeneratingUrl ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <Download className="h-4 w-4 mr-2" />
+                      Get Cloud URL
+                    </>
+                  )}
                 </Button>
               </div>
             </div>
