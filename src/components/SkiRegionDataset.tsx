@@ -179,6 +179,10 @@ export default function SkiRegionDataset() {
                   <Download className="h-4 w-4 mr-2" />
                   Export JSON
                 </Button>
+                <Button onClick={() => window.open('https://pzghdabqnsdthysjzacl.supabase.co/functions/v1/generate-dataset', '_blank')} variant="default" size="sm">
+                  <Download className="h-4 w-4 mr-2" />
+                  Get Cloud URL
+                </Button>
               </div>
             </div>
           </CardHeader>

@@ -1,1 +1,4 @@
 project_id = "pzghdabqnsdthysjzacl"
+
+[functions.generate-dataset]
+verify_jwt = false
