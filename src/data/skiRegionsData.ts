@@ -16,6 +16,10 @@ export const skiRegions = [
   { name: "Oberstdorf", country: "Germany", elevation: 813 },
   { name: "Berchtesgaden", country: "Germany", elevation: 518 },
   { name: "Feldberg", country: "Germany", elevation: 1493 },
+  { name: "Zugspitze", country: "Germany", elevation: 2962 },
+  { name: "Winterberg", country: "Germany", elevation: 810 },
+  { name: "Garmisch-Classic", country: "Germany", elevation: 1500 },
+  { name: "Brauneck", country: "Germany", elevation: 1555 },
   
   // Austria  
   { name: "Innsbruck", country: "Austria", elevation: 574 },
@@ -23,6 +27,13 @@ export const skiRegions = [
   { name: "Kitzbühel", country: "Austria", elevation: 762 },
   { name: "Salzburg", country: "Austria", elevation: 424 },
   { name: "Bad Gastein", country: "Austria", elevation: 1002 },
+  { name: "Ischgl", country: "Austria", elevation: 1377 },
+  { name: "Sölden", country: "Austria", elevation: 1377 },
+  { name: "Lech-Zürs", country: "Austria", elevation: 1450 },
+  { name: "Saalbach-Hinterglemm", country: "Austria", elevation: 1003 },
+  { name: "Mayrhofen", country: "Austria", elevation: 633 },
+  { name: "Schladming", country: "Austria", elevation: 745 },
+  { name: "Obergurgl", country: "Austria", elevation: 1930 },
   
   // Switzerland
   { name: "Zermatt", country: "Switzerland", elevation: 1620 },
@@ -30,6 +41,12 @@ export const skiRegions = [
   { name: "Verbier", country: "Switzerland", elevation: 1500 },
   { name: "Davos", country: "Switzerland", elevation: 1560 },
   { name: "Interlaken", country: "Switzerland", elevation: 568 },
+  { name: "Arosa", country: "Switzerland", elevation: 1775 },
+  { name: "Grindelwald", country: "Switzerland", elevation: 1034 },
+  { name: "Saas-Fee", country: "Switzerland", elevation: 1800 },
+  { name: "Laax", country: "Switzerland", elevation: 1100 },
+  { name: "Crans-Montana", country: "Switzerland", elevation: 1500 },
+  { name: "Engelberg", country: "Switzerland", elevation: 1050 },
 ];
 
 // Generate realistic daily data for the past year
