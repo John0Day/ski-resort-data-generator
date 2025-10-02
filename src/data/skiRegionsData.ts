@@ -57,8 +57,8 @@ export const generateSkiRegionData = (): SkiRegionData[] => {
   
   skiRegions.forEach((region) => {
     for (let i = 0; i < 1095; i++) { // 3 years of daily data
-      const currentDate = new Date(startDate);
-      currentDate.setDate(startDate.getDate() + i);
+      const currentDate = new Date(startDate.getTime());
+      currentDate.setDate(currentDate.getDate() + i);
       
       // Generate realistic weather data based on Alpine climate patterns
       const month = currentDate.getMonth();
